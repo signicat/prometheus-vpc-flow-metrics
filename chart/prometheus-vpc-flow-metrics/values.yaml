@@ -3,63 +3,52 @@ env:
   PROMETHEUS_VPC_FLOW_METRICS_PUBSUB_SUBSCRIPTION_ID: "xx"
   PROMETHEUS_VPC_FLOW_METRICS_METRICS_CACHE_LIFETIME: 5m # Default 5m. Refer to README.md for more information.
   PROMETHEUS_VPC_FLOW_METRICS_MAX_MESSAGE_AGE: 10s # Default 10s. Refer to README.md for more information.
-
 image:
   repository: ghcr.io/signicat/prometheus-vpc-flow-metrics
   pullPolicy: Always
   tag: "1.0.0" # Should match Chart.yaml appVersion
-
 # Enable creation of ServiceMonitor object
 serviceMonitor:
   enabled: false
   # interval: 30s
   # scheme: http
-
 metrics:
   port: 8080
-
 nameOverride: ""
 fullnameOverride: ""
-
 podAnnotations: {}
-
 podSecurityContext: {}
-  # fsGroup: 2000
+# fsGroup: 2000
 
 securityContext: {}
-  # capabilities:
-  #   drop:
-  #   - ALL
-  # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
-  # runAsUser: 1000
+# capabilities:
+#   drop:
+#   - ALL
+# readOnlyRootFilesystem: true
+# runAsNonRoot: true
+# runAsUser: 1000
 
 service:
   port: 80
   annotations: {}
-
 resources: {}
-  # We usually recommend not to specify default resources and to leave this as a conscious
-  # choice for the user. This also increases chances charts run on environments with little
-  # resources, such as Minikube. If you do want to specify resources, uncomment the following
-  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-  # limits:
-  #   cpu: 100m
-  #   memory: 128Mi
-  # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
+# We usually recommend not to specify default resources and to leave this as a conscious
+# choice for the user. This also increases chances charts run on environments with little
+# resources, such as Minikube. If you do want to specify resources, uncomment the following
+# lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+# limits:
+#   cpu: 100m
+#   memory: 128Mi
+# requests:
+#   cpu: 100m
+#   memory: 128Mi
 
 tolerations: []
-
 affinity: {}
-
 serviceAccount:
   create: true # Behaviour is undefined if this is disabled
   name: prometheus-vpc-flow-metrics
   annotations: {}
-
 istio:
   sidecar:
     create: false
-  
