@@ -1,0 +1,51 @@
+name: Build and push helm chart
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-helm-chart:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Extract appVersion from Chart.yaml
+        id: version
+        run: |
+          echo "app_version=$(yq '.appVersion' chart/k8s-pv-mount-point-exporter/Chart.yaml)" >> $GITHUB_OUTPUT
+
+      - name: Update values.yaml with new image tag
+        run: |
+          yq eval --inplace ".image.tag = \"${{ steps.version.outputs.app_version }}\"" chart/k8s-pv-mount-point-exporter/values.yaml
+
+      - name: Set up Helm
+        uses: azure/setup-helm@v4
+        with:
+          version: v3.18.5
+
+      - name: Build Helm chart
+        run: |
+          cd chart/
+          helm package k8s-pv-mount-point-exporter/
+          helm repo index .
+
+      - name: Commit chart changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add chart/
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+
+          git commit -m "chore: update Helm chart [skip ci]"
+          git push origin HEAD:${GITHUB_REF#refs/heads/}
