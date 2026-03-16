@@ -3,12 +3,12 @@ entries:
   prometheus-vpc-flow-metrics:
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2026-03-16T20:46:34.119619703Z"
+    created: "2026-03-16T20:47:40.96349087Z"
     description: Signicat Prometheus VPC Flow Metrics
-    digest: 3e17274bbc7a781f2a3a0d03f84e2c5685fff0761682a878aa0348dbd2793315
+    digest: 0cc3c31a5c7928d89f03d02bc91ea65931389b3dd7cde53d4ed3e55f09516c81
     name: prometheus-vpc-flow-metrics
     type: application
     urls:
     - prometheus-vpc-flow-metrics-1.0.0.tgz
     version: 1.0.0
-generated: "2026-03-16T20:46:34.119120302Z"
+generated: "2026-03-16T20:47:40.96304764Z"
