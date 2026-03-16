@@ -52,8 +52,8 @@ We recently changed to 5m Aggregation Interval and adjusted accordingly:
 
 ### Other settings
 
-`PROMETHEUS_VPC_FLOW_METRICS_ENABLE_PACKET_METRICS` - Export packet counts in addition to bandwidth. Default off. Set to `true` to enable.
-`PROMETHEUS_VPC_FLOW_METRICS_ENABLE_MESSAGES_IGNORED_DESTINATION_MISSING_METRIC` - Enable an additional internal metric of ignored messages due to missing `destination` in the VPC flow events that _also_ includes per-flow labels. Useful for debugging. Totally overkill for production. Aggregate counts already included in `vpcflow_exporter_pubsub_messages_ignored{reason="destination_missing"}` metric. Default off.
+- `PROMETHEUS_VPC_FLOW_METRICS_ENABLE_PACKET_METRICS` - Export packet counts in addition to bandwidth. Default off. Set to `true` to enable.
+- `PROMETHEUS_VPC_FLOW_METRICS_ENABLE_MESSAGES_IGNORED_DESTINATION_MISSING_METRIC` - Enable an additional internal metric of ignored messages due to missing `destination` in the VPC flow events that _also_ includes per-flow labels. Useful for debugging. Totally overkill for production. Aggregate counts already included in `vpcflow_exporter_pubsub_messages_ignored{reason="destination_missing"}` metric. Default off.
 
 # Wishlist
  - Update pubsub library to v2
