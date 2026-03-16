@@ -1,0 +1,9 @@
+apiVersion: v2
+name: prometheus-vpc-flow-metrics
+description: Signicat Prometheus VPC Flow Metrics
+
+type: application
+
+version: 1.0.0
+
+appVersion: "1.0.0" # Should match values.yaml image.tag

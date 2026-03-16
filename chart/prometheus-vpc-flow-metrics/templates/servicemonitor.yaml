@@ -1,0 +1,23 @@
+{{- if .Values.serviceMonitor.enabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ include "prometheus-vpc-flow-metrics.fullname" . }}
+  labels:
+    {{- include "prometheus-vpc-flow-metrics.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+    {{- include "prometheus-vpc-flow-metrics.selectorLabels" . | nindent 6 }}
+  endpoints:
+  - port: http-metrics
+    {{- with .Values.serviceMonitor.interval }}
+    interval: {{ . }}
+    {{- end }}
+    path: /metrics
+    scheme: {{ .Values.serviceMonitor.scheme | default "http" }}
+    {{- with .Values.serviceMonitor.tlsConfig }}
+    tlsConfig:
+      {{- toYaml . | nindent 6 }}
+    {{- end }}
+{{- end }}

@@ -1,0 +1,14 @@
+{{- if .Values.istio.sidecar.create }}
+apiVersion: networking.istio.io/v1alpha3
+kind: Sidecar
+metadata:
+  name: {{ include "prometheus-vpc-flow-metrics.fullname" . }}
+spec:
+  workloadSelector:
+    labels:
+    {{- include "prometheus-vpc-flow-metrics.selectorLabels" . | nindent 6 }}
+  egress:
+  - hosts:
+    - "./*"
+    - "istio-system/*"
+{{- end }}
