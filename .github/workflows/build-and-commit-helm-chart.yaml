@@ -19,11 +19,11 @@ jobs:
       - name: Extract appVersion from Chart.yaml
         id: version
         run: |
-          echo "app_version=$(yq '.appVersion' chart/k8s-pv-mount-point-exporter/Chart.yaml)" >> $GITHUB_OUTPUT
+          echo "app_version=$(yq '.appVersion' chart/prometheus-vpc-flow-metrics/Chart.yaml)" >> $GITHUB_OUTPUT
 
       - name: Update values.yaml with new image tag
         run: |
-          yq eval --inplace ".image.tag = \"${{ steps.version.outputs.app_version }}\"" chart/k8s-pv-mount-point-exporter/values.yaml
+          yq eval --inplace ".image.tag = \"${{ steps.version.outputs.app_version }}\"" chart/prometheus-vpc-flow-metrics/values.yaml
 
       - name: Set up Helm
         uses: azure/setup-helm@v4
@@ -33,7 +33,7 @@ jobs:
       - name: Build Helm chart
         run: |
           cd chart/
-          helm package k8s-pv-mount-point-exporter/
+          helm package prometheus-vpc-flow-metrics/
           helm repo index .
 
       - name: Commit chart changes
