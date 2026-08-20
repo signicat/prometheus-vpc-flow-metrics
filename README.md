@@ -34,6 +34,14 @@ This required you to have a the GCP Project ID and Subscription ID for the PubSu
         --set env.PROMETHEUS_VPC_FLOW_METRICS_PUBSUB_PROJECT_ID=xxx \
         --set env.PROMETHEUS_VPC_FLOW_METRICS_PUBSUB_SUBSCRIPTION_ID=xxx
 
+### Grafana dashboard
+
+![prometheus-vpc-flow-metrics grafana dashboard](https://raw.githubusercontent.com/signicat/prometheus-vpc-flow-metrics/refs/heads/main/grafana-screenshot.png)
+
+Import dashboard from https://raw.githubusercontent.com/signicat/prometheus-vpc-flow-metrics/refs/heads/main/prometheus-vpc-flow-metrics.json
+
+PS: Dashboard works best when the Prometheus datasource is backed by [VictoriaMetrics](https://victoriametrics.com/).
+
 ## Configuration
 
 ### Aggregation Interval
